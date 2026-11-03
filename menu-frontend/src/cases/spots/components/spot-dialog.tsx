@@ -8,16 +8,25 @@ import {
 } from "@/components/ui/dialog"
 import { MapPin } from "lucide-react"
 import { useSpots } from "../hooks/use-hook"
+import type { SpotDTO } from "../dtos/spot.dto"
+import { cn } from "cn"
 
 interface SpotDialogProps {
   open: boolean
+  Onselect?: (spot: SpotDTO) => void
+  selectedSpotId?: string
+
 }
 
 export function SpotDialog({
-  open
+  open,
+  Onselect,
+  selectedSpotId
  }: SpotDialogProps) {
 
   const { data: spots = [] } = useSpots();
+
+ 
 
   return (
     <Dialog open={open}>
@@ -36,7 +45,14 @@ export function SpotDialog({
               <Button
                 key={spot.id}
                 variant="outline"
-                className="h-auto min-h-20 flex-col p-4"
+                className={cn('h-auto min-h-20 flex-col p-4',
+                  spot.id === selectedSpotId && 'border-primary bg-accent text-primary'
+
+                )}
+
+
+                
+                onClick={() => Onselect?.(spot)}
               >
                 <MapPin className="size-6" />
                 { spot.name }
@@ -48,5 +64,7 @@ export function SpotDialog({
         </div>
       </DialogContent>
     </Dialog>
+    
+
   )
 }
