@@ -1,13 +1,17 @@
+import { Route, Routes } from "react-router-dom"
+import { AppLayout } from "./components/layout/app-layout"
+import { ProductPage } from "./components/pages/products/product-page"
 
-import { CategoryNav } from "./cases/categories/components/category-nav"
-import { Header } from "./components/layout/header"
 
 function App() {
 
   return (
     <>
-      <Header />
-     <CategoryNav /> 
+      <Routes>
+        <Route element={<AppLayout />}>
+          <Route path="products" element={<ProductPage />} />
+        </Route>
+      </Routes>
     </>
   )
 }

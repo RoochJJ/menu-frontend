@@ -1,9 +1,12 @@
-import { Link } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import { useCategories } from "../hooks/use-category"
 import { cn } from "@/lib/utils"
 import { Utensils } from "lucide-react"
 
 export function CategoryNav() {
+
+  const [searchParams] = useSearchParams();
+  const selectedCategoryId = searchParams.get('categoryId');
 
   const { data: categories = []} = useCategories()
 
@@ -26,10 +29,12 @@ export function CategoryNav() {
                   'border-xl border  border-transparent',
                   'transition-colors duration-200',
                   'hovver:z-10 hover:text-[#B86A2C]',
+                  selectedCategoryId === category.id ?
+                  ['border-[#B86A2C]', 'bg-primary/5 text-[#B86A2C]'] : ['text-foreground', 'border-b-border/60']
                 )}
               > 
               {category.icon ? (
-                  <span></span>
+                  <span>ICON</span>
                 ) : (
                   <Utensils
                     className="size-10 text-brand"
