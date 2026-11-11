@@ -4,3 +4,4 @@ export interface CategoryDTO {
   active: boolean
   icon?: string
 }
+
